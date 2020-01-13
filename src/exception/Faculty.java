@@ -19,9 +19,11 @@ public class Faculty {
         groupIds.add(id);
     }
 
+    public String getName() {
+        return name;
+    }
 
-
-
-
-
+    public ArrayList<Integer> getGroupIds() {
+        return groupIds;
+    }
 }

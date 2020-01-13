@@ -22,4 +22,8 @@ public class Group {
     void addStudent(int studentId){
         studentIds.add(studentId);
     }
+
+    public ArrayList<Integer> getStudentIds() {
+        return studentIds;
+    }
 }
