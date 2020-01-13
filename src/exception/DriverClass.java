@@ -2,40 +2,91 @@ package exception;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
-
 public class DriverClass {
     public static void main(String[] args) {
-        University university = new University("YSU");
-        Faculty informatics = new Faculty("Informatics");
-        university.addFaculty(informatics);
-        Group security = new Group("Security");
-        university.addGroup(informatics, security);
-        Group mathematics = new Group("Mathematics");
-        university.addGroup(informatics, mathematics);
-        Student student1 = new Student("Vahe");
-        university.addStudent(security, student1);
-        Student student2 = new Student("Armen");
-        university.addStudent(mathematics, student2);
-        Subject java = new Subject("Java");
-        Subject sql = new Subject("SQL");
-        university.addSubject(java);
-        university.addSubject(sql);
-        university.addSubjectForStudent(student1, java);
-        university.addSubjectForStudent(student2, java);
-        university.addSubjectForStudent(student2, sql);
-        student2.setSubjectMark(sql, 8);
-        student2.setSubjectMark(java, 3);
-        System.out.println("Test");
-        System.out.println("Student2 mark for sql: " + student2.getSubjectMark(sql));
-        university.checkForInadequacies();
-        System.out.println("Student2 GPA: " + student2.getGpa());
-//        University university2=new University("Hyusisayin");
-//        university2.checkForInadequacies();
-//        Faculty irav = new Faculty("Irav");
-//        university.addFaculty(irav);
-//
-//        Group myGroup = new Group("asd");
-//        university.addGroup(irav, security);
+        testTheProgram();
+    }
+
+    public static void testTheProgram(){
+        University ysu=new University("YSU");
+        //faculties
+        Faculty informatics=new Faculty("Informatics");
+        Faculty history=new Faculty("History");
+        ysu.addFaculty(informatics);
+        ysu.addFaculty(history);
+        
+        //groups for informatics
+        Group mathematics=new Group("Mathematics");
+        Group security=new Group("Security");
+        ysu.addGroup(informatics,mathematics);
+        ysu.addGroup(informatics,security);
+        
+        //groups for history
+        Group art=new Group("Art");
+        ysu.addGroup(history,art);
+        
+        //subjects
+        Subject sql=new Subject("SQL");
+        Subject java=new Subject("Java");
+        Subject php=new Subject("Php");
+        Subject js=new Subject("JS");
+        ysu.addSubject(sql);
+        ysu.addSubject(java);
+        ysu.addSubject(php);
+        ysu.addSubject(js);
+
+        //students for mathematics
+        Student vahe=new Student("Vahe");
+        ysu.addStudent(mathematics,vahe);
+        ysu.addSubjectForStudent(vahe,sql);
+        ysu.addSubjectForStudent(vahe,java);
+        vahe.setSubjectMark(sql,3);
+        vahe.setSubjectMark(java,2);
+        Student vazgen=new Student("Vazgen");
+        ysu.addStudent(mathematics,vazgen);
+        ysu.addSubjectForStudent(vazgen,java);
+        ysu.addSubjectForStudent(vazgen,php);
+        vazgen.setSubjectMark(php,9);
+        vazgen.setSubjectMark(java,4);
+        
+        //students for security
+        Student artur=new Student("Artur");
+        ysu.addStudent(security,artur);
+        ysu.addSubjectForStudent(artur,js);
+        ysu.addSubjectForStudent(artur,java);
+        artur.setSubjectMark(js,2);
+        artur.setSubjectMark(java,7);
+        
+        //students for art
+        Student arman=new Student("Arman");
+        ysu.addStudent(art,arman);
+        ysu.addSubjectForStudent(arman,java);
+        ysu.addSubjectForStudent(arman,php);
+        arman.setSubjectMark(php,8);
+        arman.setSubjectMark(java,5);
+
+        //checking the results
+        System.out.println("Average mark for java in group mathematics: "+
+                ysu.getAverageMarkForSubject(java,mathematics));
+
+        System.out.println("Average mark for java in group security: "+
+                ysu.getAverageMarkForSubject(java,security));
+
+        System.out.println("Average mark for java in group art: "+
+                ysu.getAverageMarkForSubject(java,art));
+
+        System.out.println("Average mark for java in faculty informatics: "+
+                ysu.getAverageMarkForSubject(java,informatics));
+
+        System.out.println("Average mark for java in faculty history: "+
+                ysu.getAverageMarkForSubject(java,history));
+
+        System.out.println("Average mark for java in ysu: "+
+                ysu.getAverageMarkForSubject(java));
+
+        System.out.println("Vahe's GPA is "+vahe.getGpa());
+
+
 
     }
 }

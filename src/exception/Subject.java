@@ -23,4 +23,7 @@ public class Subject {
         return id;
     }
 
+    public ArrayList<Integer> getStudentIds() {
+        return studentIds;
+    }
 }

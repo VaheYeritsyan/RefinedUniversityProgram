@@ -54,5 +54,11 @@ public class Student {
         return sum/grades.size();
     }
 
+    public ArrayList<Integer> getGrades() {
+        return grades;
+    }
 
+    public int getGroupId() {
+        return groupId;
+    }
 }

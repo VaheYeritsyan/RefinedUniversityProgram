@@ -26,4 +26,5 @@ public class Group {
     public ArrayList<Integer> getStudentIds() {
         return studentIds;
     }
+
 }

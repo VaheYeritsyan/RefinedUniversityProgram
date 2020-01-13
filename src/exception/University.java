@@ -31,7 +31,7 @@ public class University {
                     "already exists");
         }
         if (!faculties.contains(faculty)) {
-            throw new RuntimeException("No faculty named " + faculty.getName()+
+            throw new RuntimeException("No faculty named " + faculty.getName() +
                     " found");
         }
         groups.add(group);
@@ -42,7 +42,7 @@ public class University {
 
     public void addFaculty(Faculty faculty) {
         if (faculties.contains(faculty)) {
-            throw new RuntimeException("Faculty " +faculty.getName()+
+            throw new RuntimeException("Faculty " + faculty.getName() +
                     "already exists");
         }
         faculties.add(faculty);
@@ -60,6 +60,7 @@ public class University {
         groups.get(groups.indexOf(group))
                 .addStudent(student.getId());
         students.add(student);
+        student.setGroupId(group.getId());
         if (student.getSubjectIds() != null) {
             for (int i = 0; i < student.getSubjectIds().size(); i++) {
                 for (Subject subject : subjects) {
@@ -117,4 +118,66 @@ public class University {
                     " does not have any faculties");
         }
     }
+
+    public double getAverageMarkForSubject(Subject subject) {
+
+        if (!subjects.contains(subject)) {
+            throw new RuntimeException("No subject named " + subject.getName() +
+                    " found in the university");
+        }
+        checkForInadequacies();
+        double sum = 0;
+        for (Student student : students) {
+            for (int learnerId : subject.getStudentIds()) {
+                if (student.getId() == learnerId) {
+                    sum += student.getSubjectMark(subject);
+                }
+            }
+        }
+        return sum / subject.getStudentIds().size();
+
+    }
+
+    public double getAverageMarkForSubject(Subject subject, Group group) {
+        if (!subjects.contains(subject)) {
+            throw new RuntimeException("No subject named " + subject.getName() +
+                    " found in the university");
+        }
+        if (!groups.contains(group)) {
+            throw new RuntimeException("No group named " + group.getName() +
+                    " found in the university");
+        }
+        double sum = 0;
+        int learnerCount = 0;
+
+        for (Student student : students) {
+            if (student.getGroupId() == group.getId() &&subject.getStudentIds()
+                        .contains(student.getId())) {
+                sum += student.getSubjectMark(subject);
+                learnerCount++;
+            }
+        }
+        return sum / learnerCount;
+    }
+    public double getAverageMarkForSubject(Subject subject, Faculty faculty) {
+        if (!subjects.contains(subject)) {
+            throw new RuntimeException("No subject named " + subject.getName() +
+                    " found in the university");
+        }
+        if (!faculties.contains(faculty)) {
+            throw new RuntimeException("No faculty named " + faculty.getName() +
+                    " found in the university");
+        }
+        double sum = 0;
+        int learnerCount = 0;
+
+        for (Student student : students) {
+            if(faculty.getGroupIds().contains(student.getGroupId())){
+                learnerCount++;
+                sum+=student.getSubjectMark(subject);
+            }
+        }
+        return sum / learnerCount;
+    }
+
 }
