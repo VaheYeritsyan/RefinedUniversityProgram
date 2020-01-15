@@ -15,7 +15,7 @@ public class Faculty {
     public boolean hasGroup(Group group){
         return groupIds.contains(group.getId());
     }
-    public void addGroupId(int id){
+    void addGroupId(int id){
         groupIds.add(id);
     }
 
@@ -24,6 +24,6 @@ public class Faculty {
     }
 
     public ArrayList<Integer> getGroupIds() {
-        return groupIds;
+        return new ArrayList<>(groupIds);
     }
 }

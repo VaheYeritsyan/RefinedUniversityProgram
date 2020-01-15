@@ -18,12 +18,15 @@ public class Student {
         return fullName;
     }
 
-    public void setGroupId(int groupId) {
+    void setGroupId(int groupId) {
         this.groupId = groupId;
     }
 
     public ArrayList<Integer> getSubjectIds() {
-        return subjectIds;
+        return new ArrayList<>(subjectIds);
+    }
+    void addSubject(int subjectId){
+        subjectIds.add(subjectId);
     }
 
     public int getId() {
@@ -55,7 +58,7 @@ public class Student {
     }
 
     public ArrayList<Integer> getGrades() {
-        return grades;
+        return new ArrayList<>(grades);
     }
 
     public int getGroupId() {

@@ -86,7 +86,15 @@ public class DriverClass {
 
         System.out.println("Vahe's GPA is "+vahe.getGpa());
 
-
-
+        //checking the exceptions
+        
+        //University emptyUniversity=new University("I have no faculties");
+        //emptyUniversity.checkForInadequacies();
+        //Faculty emptyFaculty=new Faculty("I have no groups");
+        //ysu.addFaculty(emptyFaculty);
+        //Group emptyGroup=new Group("I have no students");
+        //Student lazyStudent=new Student("I have no classes");
+        //ysu.addStudent(mathematics,lazyStudent);
+        //ysu.checkForInadequacies()
     }
 }

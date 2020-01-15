@@ -1,5 +1,4 @@
 package exception;
-
 import java.util.ArrayList;
 
 public class University {
@@ -25,10 +24,9 @@ public class University {
         return groups.contains(group);
     }
 
-    public void addGroup(Faculty faculty, Group group) {
+    public boolean addGroup(Faculty faculty, Group group) {
         if (hasGroup(group)) {
-            throw new RuntimeException("Group " + group.getName() +
-                    "already exists");
+            return false;
         }
         if (!faculties.contains(faculty)) {
             throw new RuntimeException("No faculty named " + faculty.getName() +
@@ -37,30 +35,31 @@ public class University {
         groups.add(group);
         faculties.get(faculties.indexOf(faculty))
                 .addGroupId(group.getId());
+        return true;
 
     }
 
-    public void addFaculty(Faculty faculty) {
+    public boolean addFaculty(Faculty faculty) {
         if (faculties.contains(faculty)) {
-            throw new RuntimeException("Faculty " + faculty.getName() +
-                    "already exists");
+            return true;
         }
         faculties.add(faculty);
+        return false;
     }
 
-    public void addStudent(Group group, Student student) {
+    public boolean addStudent(Group group, Student student) {
         if (!groups.contains(group)) {
             throw new RuntimeException("The university has no group named " +
                     group.getName());
         }
         if (students.contains(student)) {
-            throw new RuntimeException("Student " + student.getFullName() +
-                    " already exists");
+            return false;
         }
         groups.get(groups.indexOf(group))
                 .addStudent(student.getId());
         students.add(student);
         student.setGroupId(group.getId());
+        //get student's subjects and add to them student's id
         if (student.getSubjectIds() != null) {
             for (int i = 0; i < student.getSubjectIds().size(); i++) {
                 for (Subject subject : subjects) {
@@ -71,9 +70,10 @@ public class University {
 
             }
         }
+        return true;
     }
 
-    public void addSubjectForStudent(Student student, Subject subject) {
+    public boolean addSubjectForStudent(Student student, Subject subject) {
         if (!subjects.contains(subject)) {
             throw new RuntimeException("No subject named " + subject.getName() +
                     " available in the university");
@@ -82,16 +82,17 @@ public class University {
             throw new RuntimeException("No student named " + student.getFullName() +
                     " in the university");
         }
-        student.getSubjectIds().add(subject.getId());
+        student.addSubject(subject.getId());
         subject.addStudent(student.getId());
+        return true;
     }
 
-    public void addSubject(Subject subject) {
+    public boolean addSubject(Subject subject) {
         if (subjects.contains(subject)) {
-            throw new RuntimeException("Subject " + subject.getName() +
-                    " already exists");
+            return false;
         }
         subjects.add(subject);
+        return true;
     }
 
     public void checkForInadequacies() {
