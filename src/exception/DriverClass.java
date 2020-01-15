@@ -85,9 +85,12 @@ public class DriverClass {
                 ysu.getAverageMarkForSubject(java));
 
         System.out.println("Vahe's GPA is "+vahe.getGpa());
+        ysu.checkForInadequacies();
+
+
 
         //checking the exceptions
-        
+
         //University emptyUniversity=new University("I have no faculties");
         //emptyUniversity.checkForInadequacies();
         //Faculty emptyFaculty=new Faculty("I have no groups");

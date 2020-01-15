@@ -126,7 +126,6 @@ public class University {
             throw new RuntimeException("No subject named " + subject.getName() +
                     " found in the university");
         }
-        checkForInadequacies();
         double sum = 0;
         for (Student student : students) {
             for (int learnerId : subject.getStudentIds()) {
@@ -174,8 +173,10 @@ public class University {
 
         for (Student student : students) {
             if(faculty.getGroupIds().contains(student.getGroupId())){
-                learnerCount++;
-                sum+=student.getSubjectMark(subject);
+                if(student.getSubjectIds().contains(subject.getId())) {
+                    learnerCount++;
+                    sum += student.getSubjectMark(subject);
+                }
             }
         }
         return sum / learnerCount;
