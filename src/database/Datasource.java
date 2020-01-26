@@ -95,7 +95,7 @@ public class Datasource {
         createTableStudents();
         try(Statement statement=connection.createStatement()) {
             String query=String.format("INSERT INTO %s values(%d,'%s',%d)",
-                    TABLE_STUDENTS,student.getId(),student.getFullName(),student.getId());
+                    TABLE_STUDENTS,student.getId(),student.getFullName(),student.getGroupId());
             statement.execute(query);
             return true;
         }catch (SQLException e) {

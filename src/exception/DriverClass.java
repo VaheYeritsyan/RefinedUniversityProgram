@@ -2,8 +2,6 @@ package exception;
 
 import database.Datasource;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 public class DriverClass {
     public static void main(String[] args) {
         testTheProgram();
