@@ -1,5 +1,7 @@
 package exception;
 
+import database.Datasource;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 public class DriverClass {
@@ -86,6 +88,11 @@ public class DriverClass {
 
         System.out.println("Vahe's GPA is "+vahe.getGpa());
         ysu.checkForInadequacies();
+
+        Datasource datasource=new Datasource();
+        datasource.createTableStudents();
+        datasource.addStudent(vahe);
+
 
 
 
