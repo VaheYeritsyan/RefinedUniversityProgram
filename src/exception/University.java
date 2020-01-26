@@ -33,6 +33,9 @@ public class University {
                     " found");
         }
         groups.add(group);
+        groups.get(groups.indexOf(group))
+                .setFacultyId(faculty.getId());
+
         faculties.get(faculties.indexOf(faculty))
                 .addGroupId(group.getId());
         return true;
@@ -182,4 +185,19 @@ public class University {
         return sum / learnerCount;
     }
 
+    public ArrayList<Faculty> getFaculties() {
+        return new ArrayList<>(faculties);
+    }
+
+    public ArrayList<Group> getGroups() {
+        return new ArrayList<>(groups);
+    }
+
+    public ArrayList<Student> getStudents() {
+        return new ArrayList<>(students);
+    }
+
+    public ArrayList<Subject> getSubjects() {
+        return new ArrayList<>(subjects);
+    }
 }

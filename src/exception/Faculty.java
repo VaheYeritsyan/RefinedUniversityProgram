@@ -26,4 +26,8 @@ public class Faculty {
     public ArrayList<Integer> getGroupIds() {
         return new ArrayList<>(groupIds);
     }
+
+    public int getId() {
+        return id;
+    }
 }

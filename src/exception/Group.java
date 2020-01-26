@@ -7,6 +7,7 @@ public class Group {
     private int id;
     private ArrayList<Integer> studentIds=new ArrayList<>();
     private static int serialId=1;
+    private int facultyId;
     public Group(String name) {
         this.name = name;
         id=serialId;
@@ -27,4 +28,11 @@ public class Group {
         return new ArrayList<>(studentIds);
     }
 
+    public int getFacultyId() {
+        return facultyId;
+    }
+
+    public void setFacultyId(int facultyId) {
+        this.facultyId = facultyId;
+    }
 }

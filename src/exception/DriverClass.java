@@ -90,8 +90,15 @@ public class DriverClass {
         ysu.checkForInadequacies();
 
         Datasource datasource=new Datasource();
-        datasource.createTableStudents();
-        datasource.addStudent(vahe);
+        //this line should add al the information to the database
+        datasource.addEntireUniversity(ysu);
+//        datasource.addStudent(vahe);
+//        datasource.addFaculty(informatics);
+//        datasource.createTableFaculties();
+//        datasource.addGroup(mathematics);
+//        datasource.createTableStudents();
+//        datasource.addStudent(artur);
+
 
 
 
