@@ -16,9 +16,6 @@ public class University {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public boolean hasGroup(Group group) {
         return groups.contains(group);
@@ -28,10 +25,7 @@ public class University {
         if (hasGroup(group)) {
             return false;
         }
-        if (!faculties.contains(faculty)) {
-            throw new RuntimeException("No faculty named " + faculty.getName() +
-                    " found");
-        }
+        validateFaculty(faculty);
         groups.add(group);
         groups.get(groups.indexOf(group))
                 .setFacultyId(faculty.getId());
@@ -51,10 +45,7 @@ public class University {
     }
 
     public boolean addStudent(Group group, Student student) {
-        if (!groups.contains(group)) {
-            throw new RuntimeException("The university has no group named " +
-                    group.getName());
-        }
+        validateGroup(group);
         if (students.contains(student)) {
             return false;
         }
@@ -77,14 +68,8 @@ public class University {
     }
 
     public boolean addSubjectForStudent(Student student, Subject subject) {
-        if (!subjects.contains(subject)) {
-            throw new RuntimeException("No subject named " + subject.getName() +
-                    " available in the university");
-        }
-        if (!students.contains(student)) {
-            throw new RuntimeException("No student named " + student.getFullName() +
-                    " in the university");
-        }
+        validateSubject(subject);
+        validateStudent(student);
         student.addSubject(subject.getId());
         subject.addStudent(student.getId());
         return true;
@@ -125,10 +110,7 @@ public class University {
 
     public double getAverageMarkForSubject(Subject subject) {
 
-        if (!subjects.contains(subject)) {
-            throw new RuntimeException("No subject named " + subject.getName() +
-                    " found in the university");
-        }
+        validateSubject(subject);
         double sum = 0;
         for (Student student : students) {
             for (int learnerId : subject.getStudentIds()) {
@@ -142,14 +124,8 @@ public class University {
     }
 
     public double getAverageMarkForSubject(Subject subject, Group group) {
-        if (!subjects.contains(subject)) {
-            throw new RuntimeException("No subject named " + subject.getName() +
-                    " found in the university");
-        }
-        if (!groups.contains(group)) {
-            throw new RuntimeException("No group named " + group.getName() +
-                    " found in the university");
-        }
+        validateSubject(subject);
+        validateGroup(group);
         double sum = 0;
         int learnerCount = 0;
 
@@ -163,14 +139,8 @@ public class University {
         return sum / learnerCount;
     }
     public double getAverageMarkForSubject(Subject subject, Faculty faculty) {
-        if (!subjects.contains(subject)) {
-            throw new RuntimeException("No subject named " + subject.getName() +
-                    " found in the university");
-        }
-        if (!faculties.contains(faculty)) {
-            throw new RuntimeException("No faculty named " + faculty.getName() +
-                    " found in the university");
-        }
+        validateSubject(subject);
+        validateFaculty(faculty);
         double sum = 0;
         int learnerCount = 0;
 
@@ -197,7 +167,44 @@ public class University {
         return new ArrayList<>(students);
     }
 
-    public ArrayList<Subject> getSubjects() {
-        return new ArrayList<>(subjects);
+    @Override
+    public String toString() {
+        return "University{" +
+                "name='" + name + '\'' +
+                ", faculties=" + faculties +
+                ", groups=" + groups +
+                ", students=" + students +
+                ", subjects=" + subjects +
+                '}';
     }
+
+
+    private void validateGroup(Group group){
+        if(!groups.contains(group)) {
+            throw new IllegalArgumentException("No Group named " + group.getName() +
+                    " found in the university");
+        }
+    }
+
+    private void validateFaculty(Faculty faculty){
+        if(!faculties.contains(faculty)) {
+            throw new IllegalArgumentException("No Faculty named " + faculty +
+                    " found in the university");
+        }
+    }
+
+    private void validateStudent(Student student){
+        if(!students.contains(student)) {
+            throw new IllegalArgumentException("No Student named " + student +
+                    " found in the university");
+        }
+    }
+
+    private void validateSubject(Subject subject){
+        if(!subjects.contains(subject)) {
+            throw new IllegalArgumentException("No subject named " + subject +
+                    " found in the university");
+        }
+    }
+    
 }

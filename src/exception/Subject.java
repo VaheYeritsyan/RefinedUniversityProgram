@@ -6,6 +6,14 @@ public class Subject {
     private String name;
     private static int serialId=1;
     private int id;
+
+    @Override
+    public String toString() {
+        return "Subject{" +
+                "name='" + name + '\'' +
+                '}';
+    }
+
     private ArrayList<Integer> studentIds=new ArrayList<>();
     public Subject(String name) {
         this.name = name;
@@ -14,9 +22,6 @@ public class Subject {
     }
     public void addStudent(int studentId){
         studentIds.add(studentId);
-    }
-    public String getName() {
-        return name;
     }
 
     public int getId() {

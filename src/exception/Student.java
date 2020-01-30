@@ -33,12 +33,19 @@ public class Student {
         return id;
     }
 
-    public void setSubjectMark(Subject subject,int mark){
+    @Override
+    public String toString() {
+        return "Student{" +
+                "fullName='" + fullName + '\'' +
+                '}';
+    }
+
+    public void setSubjectMark(Subject subject, int mark){
         if(!subjectIds.contains(subject.getId())){
-            throw new RuntimeException("Student doesn't have this subject");
+            throw new IllegalArgumentException("Student doesn't have this subject");
         }
         if(mark<0||mark>10){
-            throw new RuntimeException("Mark should be in range 0 to 10");
+            throw new IllegalArgumentException("Mark should be in range 0 to 10");
         }
         for(int i=grades.size();i<subjectIds.size();++i){
             grades.add(0);
@@ -55,10 +62,6 @@ public class Student {
             sum+=mark;
         }
         return sum/grades.size();
-    }
-
-    public ArrayList<Integer> getGrades() {
-        return new ArrayList<>(grades);
     }
 
     public int getGroupId() {

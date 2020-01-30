@@ -2,6 +2,9 @@ package exception;
 
 import database.Datasource;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class DriverClass {
     public static void main(String[] args) {
         testTheProgram();
@@ -86,10 +89,11 @@ public class DriverClass {
 
         System.out.println("Vahe's GPA is "+vahe.getGpa());
         ysu.checkForInadequacies();
+        System.out.println(ysu);
 
-        Datasource datasource=new Datasource();
+//        Datasource datasource=new Datasource();
         //this line should add al the information to the database
-        datasource.addEntireUniversity(ysu);
+//        datasource.addEntireUniversity(ysu);
 //        datasource.addStudent(vahe);
 //        datasource.addFaculty(informatics);
 //        datasource.createTableFaculties();

@@ -12,9 +12,6 @@ public class Faculty {
         id=serialId;
         serialId++;
     }
-    public boolean hasGroup(Group group){
-        return groupIds.contains(group.getId());
-    }
     void addGroupId(int id){
         groupIds.add(id);
     }
@@ -29,5 +26,12 @@ public class Faculty {
 
     public int getId() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return "Faculty{" +
+                "name='" + name + '\'' +
+                '}';
     }
 }

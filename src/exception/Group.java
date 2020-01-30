@@ -28,6 +28,13 @@ public class Group {
         return new ArrayList<>(studentIds);
     }
 
+    @Override
+    public String toString() {
+        return "Group{" +
+                "name='" + name + '\'' +
+                '}';
+    }
+
     public int getFacultyId() {
         return facultyId;
     }
